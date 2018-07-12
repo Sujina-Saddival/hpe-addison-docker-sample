@@ -9,9 +9,7 @@ FROM hub.docker.hpecorp.net/global-it/addison-nodejs-test:3.0.0
 
 # # Defining a HOST environment variable will make Addison listen on all interfaces (0.0.0.0)
 # # on port 8080  (as port 3000 cannot be bound to when running as a non-privileged user)
-ENV ADDISON_HOST=0.0.0.0 \
-  ADDISON_PORT=8080 \
-  https_proxy=http://proxy.houston.hpecorp.net:8080 \
+ENV https_proxy=http://proxy.houston.hpecorp.net:8080 \
   http_proxy=http://proxy.houston.hpecorp.net:8080
 
 # Set our working directory
@@ -23,7 +21,7 @@ WORKDIR boa-api-launches/
 RUN npm --registry https://registry.npmjs.itcs.hpecorp.net/ install --verbose
 
 # Container port which app is going to listen on...
-EXPOSE $ADDISON_PORT
+EXPOSE 8080
 
 # Start up info...
 CMD ["npm", "start"]
